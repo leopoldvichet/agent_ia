@@ -1,4 +1,5 @@
 from game.board import Board
+from agent.random_agent import get_random_move
 
 def main():
     board = Board()
@@ -9,7 +10,11 @@ def main():
         board.display()
         piece = 1 if turn % 2 == 0 else 2
         try:
-            col = int(input(f"Joueur {piece}, choisis une colonne (0-{board.cols-1}): "))
+            if piece == 1:
+                col = int(input(f"Joueur {piece}, choisis une colonne (0-{board.cols-1}): "))
+            else:
+                col = get_random_move(board)
+                print(f"IA joue sur la colonne {col}")    
             if 0 <= col < board.cols:
                 if board.is_valid_move(col):
                     board.drop_piece(col, piece)
