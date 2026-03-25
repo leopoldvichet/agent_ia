@@ -8,6 +8,9 @@ class Board:
         print("\nPlateau :")
         for row in self.grid:
             print(" | ".join(str(cell) for cell in row))
+        indication = [0,1,2,3,4,5,6]
+        print("-" * 25)
+        print(" | ".join(str(elem) for elem in indication))
         print("-" * 25)
 
     def is_valid_move(self, col):
@@ -18,6 +21,11 @@ class Board:
             if self.grid[row][col] == 0:
                 return row
         return None
+
+    def copy(self):
+        new_board = Board()
+        new_board.grid = [row[:] for row in self.grid]
+        return new_board
 
     def drop_piece(self, col, piece):
         row = self.get_next_open_row(col)
